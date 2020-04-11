@@ -373,7 +373,7 @@
                 <plugins>
                   			
   			        <!-- Copy resources into the output directory prior to packaging  --> 
-                    <plugin>
+                    <!-- <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-resources-plugin</artifactId>
                         <version>2.4.2</version>
@@ -387,7 +387,7 @@
                                 <configuration>
                                     <overwrite>true</overwrite>
                                     <outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}/WEB-INF/classes/</outputDirectory>
-                                    <!-- <resources>
+                                    <resources>
                                         <resource>
                                             <directory>${daytraderKeystoreFolder}</directory>
                                             <includes>
@@ -395,11 +395,11 @@
                                                 <include>truststore.jks</include>
                                             </includes>
                                         </resource>
-                                    </resources> -->
+                                    </resources>
                                 </configuration>
                             </execution>
                         </executions>
-                    </plugin>
+                    </plugin> -->
                 
                     <!--  Repackage the WAR so it can be executed from the command line using java -jar -->
                     <plugin>
@@ -509,7 +509,7 @@
                                 <phase>pre-integration-test</phase>
                                 <configuration>
                                     <target>
-                                        <sleep seconds="30" />
+                                        <sleep seconds="90" />
                                     </target>
                                 </configuration>
                                 <goals>
