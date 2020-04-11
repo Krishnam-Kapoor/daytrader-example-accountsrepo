@@ -200,10 +200,10 @@
                 <daytraderLogLevel>TRACE</daytraderLogLevel>
                 <daytraderLogFilename>/var/log/daytrader/${daytraderAppArtifactId}-${daytraderAppVersion}.log</daytraderLogFilename>
                 <daytraderLogAppender>ConsoleAppender</daytraderLogAppender>
-                <accountsServiceRoute>https://localhost:1443</accountsServiceRoute>
-                <gatewayServiceRoute>https://localhost:2443</gatewayServiceRoute>
-                <portfoliosServiceRoute>https://localhost:3443</portfoliosServiceRoute>
-                <quotesServiceRoute>https://localhost:4443</quotesServiceRoute>
+                <accountsServiceRoute>http://localhost:1443</accountsServiceRoute>
+                <gatewayServiceRoute>http://localhost:2443</gatewayServiceRoute>
+                <portfoliosServiceRoute>http://localhost:3443</portfoliosServiceRoute>
+                <quotesServiceRoute>http://localhost:4443</quotesServiceRoute>
                 <daytraderTruststoreLocation>${daytraderKeystoreFolder}/truststore.jks</daytraderTruststoreLocation>
                 <daytraderTruststorePassword>password</daytraderTruststorePassword>     
             </properties>
@@ -360,10 +360,10 @@
                 <daytraderLogLevel>TRACE</daytraderLogLevel>
                 <daytraderLogFilename>/var/log/daytrader/${daytraderAppArtifactId}-${daytraderAppVersion}.log</daytraderLogFilename>
                 <daytraderLogAppender>ConsoleAppender</daytraderLogAppender>
-                <accountsServiceRoute>http://localhost:8001/api/v1/namespaces/default/services/https:daytrader-accounts:/proxy</accountsServiceRoute>
-                <gatewayServiceRoute>http://localhost:8001/api/v1/namespaces/default/services/https:daytrader-gateway:/proxy</gatewayServiceRoute>
-                <portfoliosServiceRoute>http://localhost:8001/api/v1/namespaces/default/services/https:daytrader-portfolios:/proxy</portfoliosServiceRoute>
-                <quotesServiceRoute>http://localhost:8001/api/v1/namespaces/default/services/https:daytrader-quotes:/proxy</quotesServiceRoute>
+                <accountsServiceRoute>http://localhost:8001/api/v1/namespaces/default/services/http:daytrader-accounts:/proxy</accountsServiceRoute>
+                <gatewayServiceRoute>http://localhost:8001/api/v1/namespaces/default/services/http:daytrader-gateway:/proxy</gatewayServiceRoute>
+                <portfoliosServiceRoute>http://localhost:8001/api/v1/namespaces/default/services/http:daytrader-portfolios:/proxy</portfoliosServiceRoute>
+                <quotesServiceRoute>http://localhost:8001/api/v1/namespaces/default/services/http:daytrader-quotes:/proxy</quotesServiceRoute>
                 <daytraderTruststoreLocation>${daytraderKeystoreFolder}/truststore.jks</daytraderTruststoreLocation>
                 <daytraderTruststorePassword>password</daytraderTruststorePassword>     
             </properties>
