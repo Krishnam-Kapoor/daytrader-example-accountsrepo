@@ -352,11 +352,11 @@
   		<profile>
   			<id>kubernetes</id>
   			<properties>
-  				<daytraderKeystoreFolder>${project.basedir}/src/main/resources/external/ssl</daytraderKeystoreFolder>
+  				<!-- <daytraderKeystoreFolder>${project.basedir}/src/main/resources/external/ssl</daytraderKeystoreFolder> -->
 				<docker.image.prefix>krishnam007</docker.image.prefix>
 				<dockerfile-maven-version>1.4.0</dockerfile-maven-version>	
 
-                <daytraderKeystoreFolder>${project.basedir}/src/main/resources/external/ssl</daytraderKeystoreFolder>
+                <!-- <daytraderKeystoreFolder>${project.basedir}/src/main/resources/external/ssl</daytraderKeystoreFolder> -->
                 <daytraderLogLevel>TRACE</daytraderLogLevel>
                 <daytraderLogFilename>/var/log/daytrader/${daytraderAppArtifactId}-${daytraderAppVersion}.log</daytraderLogFilename>
                 <daytraderLogAppender>ConsoleAppender</daytraderLogAppender>
@@ -364,8 +364,8 @@
                 <gatewayServiceRoute>http://localhost:8001/api/v1/namespaces/default/services/http:daytrader-gateway:/proxy</gatewayServiceRoute>
                 <portfoliosServiceRoute>http://localhost:8001/api/v1/namespaces/default/services/http:daytrader-portfolios:/proxy</portfoliosServiceRoute>
                 <quotesServiceRoute>http://localhost:8001/api/v1/namespaces/default/services/http:daytrader-quotes:/proxy</quotesServiceRoute>
-                <daytraderTruststoreLocation>${daytraderKeystoreFolder}/truststore.jks</daytraderTruststoreLocation>
-                <daytraderTruststorePassword>password</daytraderTruststorePassword>     
+                <!-- <daytraderTruststoreLocation>${daytraderKeystoreFolder}/truststore.jks</daytraderTruststoreLocation>
+                <daytraderTruststorePassword>password</daytraderTruststorePassword>      -->
             </properties>
   			
   			<build>
@@ -387,7 +387,7 @@
                                 <configuration>
                                     <overwrite>true</overwrite>
                                     <outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}/WEB-INF/classes/</outputDirectory>
-                                    <resources>
+                                    <!-- <resources>
                                         <resource>
                                             <directory>${daytraderKeystoreFolder}</directory>
                                             <includes>
@@ -395,7 +395,7 @@
                                                 <include>truststore.jks</include>
                                             </includes>
                                         </resource>
-                                    </resources>
+                                    </resources> -->
                                 </configuration>
                             </execution>
                         </executions>
@@ -467,10 +467,10 @@
                                         <DAYTRADER_LOG_FILENAME>${daytraderLogFilename}</DAYTRADER_LOG_FILENAME>
                                         <DAYTRADER_LOG_APPENDER>${daytraderLogAppender}</DAYTRADER_LOG_APPENDER>
                                     </environmentVariables>                                    
-                                    <systemPropertyVariables>
+                                    <!-- <systemPropertyVariables>
                                         <javax.net.ssl.trustStore>${daytraderTruststoreLocation}</javax.net.ssl.trustStore>
                                         <javax.net.ssl.trustStorePassword>${daytraderTruststorePassword}</javax.net.ssl.trustStorePassword>
-                                    </systemPropertyVariables>
+                                    </systemPropertyVariables> -->
                                     
                                     <!-- Don't use system class loader or else maven-failsafe-plugin fails -->
                                     <useSystemClassLoader>false</useSystemClassLoader>
@@ -509,7 +509,7 @@
                                 <phase>pre-integration-test</phase>
                                 <configuration>
                                     <target>
-                                        <sleep seconds="90" />
+                                        <sleep seconds="30" />
                                     </target>
                                 </configuration>
                                 <goals>
