@@ -38,6 +38,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.naming.InitialContext;
 
@@ -396,7 +397,29 @@ public class AccountsService
         }
         return accountProfileData;
     }
-	
+
+	/**
+	 *
+	 * @see TradeServices#getAllAccountsProfileData()
+	 *
+	 */
+	public List<AccountProfileDataBean> getAllAccountsProfileData() throws Exception {
+		List<AccountProfileDataBean> accountProfileData = null;
+		Connection conn = null;
+
+		try {
+			conn = getConn();
+			accountProfileData = getAllAccountsProfileData(conn);
+			commit(conn);
+		} catch (Exception e) {
+			rollBack(conn, e);
+			throw e;
+		} finally {
+			releaseConn(conn);
+		}
+		return accountProfileData;
+	}
+
    /**
 	*
 	* @see TradeServices#updateAccountProfile(AccountProfileDataBean)
@@ -635,6 +658,30 @@ public class AccountsService
         return accountProfileData;
     }
 
+    	private List<AccountProfileDataBean> getAllAccountsProfileData(Connection conn) throws Exception {
+		PreparedStatement stmt = getStatement(conn, getAllAccountsProfileSQL);
+
+		ResultSet rs = stmt.executeQuery();
+
+		List<AccountProfileDataBean> accountProfileData = new ArrayList<>();
+		if (!rs.next())
+		{
+			Log.debug("AccountsService:getAccountProfileData() - cannot find profile data ");
+		}
+		else {
+			int i = 0;
+			while (rs.next() == true) {
+				accountProfileData.add(getAccountProfileDataFromResultSet(rs));
+				i++;
+			}
+			Log.debug("AccountsService:getAccountProfileData() - done fetching " + i + " records.");
+		}
+
+		stmt.close();
+
+		return accountProfileData;
+	}
+
     private void updateAccountProfile(Connection conn, AccountProfileDataBean profileData) throws Exception {
         PreparedStatement stmt = getStatement(conn, updateAccountProfileSQL);
 
@@ -839,7 +886,10 @@ public class AccountsService
     private final static String getAccountProfileSQL =
         "select * from accountprofileejb ap where ap.userid = "
             + "(select profile_userid from accountejb a where a.profile_userid=?)";
-    
+
+    private final static String getAllAccountsProfileSQL =
+			"select * from accountprofileejb"; 
+
     private static final String getAccountForUserSQL =
     	"select * from accountejb a where a.profile_userid = "
     		+ "( select userid from accountprofileejb ap where ap.userid = ?)";

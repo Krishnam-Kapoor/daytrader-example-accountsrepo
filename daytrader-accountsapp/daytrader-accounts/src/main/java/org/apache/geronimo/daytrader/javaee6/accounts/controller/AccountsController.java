@@ -25,6 +25,7 @@ import org.apache.geronimo.daytrader.javaee6.accounts.utils.Log;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.ws.rs.NotAuthorizedException;
 
@@ -174,7 +175,34 @@ public class AccountsController
 			return new ResponseEntity<AccountProfileDataBean>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
+
+@RequestMapping(value = "/allprofiles", method = RequestMethod.GET)
+	public ResponseEntity<List<AccountProfileDataBean>> getAllAccountsProfileData() {
+
+		Log.traceEnter("AccountsController.getAllAccountsProfileData()");
+		List<AccountProfileDataBean> profileData = null;
+		try
+		{
+			profileData = accountsService.getAllAccountsProfileData();
+			if (profileData != null)
+			{
+				Log.traceExit("AccountsController.getAccountProfileData()");
+				return new ResponseEntity<List<AccountProfileDataBean>>(profileData, getNoCacheHeaders(), HttpStatus.OK);
+			}
+			else
+			{
+				Log.traceExit("AccountsController.getAccountProfileData()");
+				return new ResponseEntity<List<AccountProfileDataBean>>(profileData, getNoCacheHeaders(), HttpStatus.NO_CONTENT);
+			}
+		}
+		catch(Throwable t)
+		{
+			Log.error("AccountsController.getAccountProfileData()",t);
+			return new ResponseEntity<List<AccountProfileDataBean>>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+		
 	/**
 	 * REST call to get the user's account
 	 * 
